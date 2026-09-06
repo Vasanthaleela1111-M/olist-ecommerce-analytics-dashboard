@@ -1,0 +1,16 @@
+metric,value
+Total Delivered Orders (Denominator N),96470.0
+On-Time Delivery Rate (%),91.89
+Late Delivery Rate (%),8.11
+Mean Actual Delivery Lead Time (Days),12.56
+Median Actual Delivery Lead Time (Days),10.22
+Mean Estimated Delivery Lead Time (Days),23.74
+Mean Carrier Dispatch Delay (Days),2.8
+Mean Carrier Transit Time (Days),9.33
+Mean Delay for Late Orders (Days),9.55
+Median Delay for Late Orders (Days),5.81
+Average Review Score (On-Time Orders),4.28
+Average Review Score (Late Orders),2.54
+1-Star Review Rate (On-Time Orders %),6.82
+1-Star Review Rate (Late Orders %),46.73
+Correlation (Delay Days vs Review Score r),-0.2692

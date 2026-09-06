@@ -1,0 +1,11 @@
+Case,Orders,Revenue,AvgReview,LowCount,LowRatePct,Delivered,LateCount,LateRatePct
+1. All States + All Categories,99441,15843553.24,4.07,15010,15.09,96478,7826,8.11
+2. AC + All Categories,81,19669.7,4.05,13,16.05,80,3,3.75
+3. AC + baby,3,871.97,5.0,0,0.0,3,0,0.0
+4. AC + health_beauty,6,1655.0,4.17,1,16.67,6,0,0.0
+5. SP + All Categories,41746,5921678.12,4.16,5420,12.98,40501,2387,5.89
+6. SP + baby,1167,177561.25,4.15,149,12.77,1126,73,6.48
+7. All States + baby,2840,479804.7,4.04,455,16.02,2764,256,9.26
+8. SP + baby + Late,73,11529.85,2.41,42,57.53,73,73,100.0
+9. SP + health_beauty + Top 10% Seller,2109,346995.99,4.26,232,11.0,2073,153,7.38
+10. Deliberately Empty (AC + non_existent),0,0.0,,0,,0,0,

@@ -1,0 +1,9 @@
+feature_key,feature_name,importance
+carrier_dispatch_days,Seller Dispatch Lead Time (Days),0.41072035576359545
+customer_state_freq,Customer State Volume Share,0.13753799165873984
+total_freight,Total Freight Value (R$),0.13058248764403735
+freight_ratio,Freight Burden Ratio (Freight / Price),0.10909524642307537
+total_price,Total Order Price (R$),0.10564594467610147
+seller_state_freq,Seller State Volume Share,0.05953516063571356
+is_interstate,Inter-State Route Indicator,0.030196355208643742
+item_count,Items per Order Count,0.016686457990093193

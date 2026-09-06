@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Olist Executive Analytics Platform | Web App Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</head>
+<body>
+
+  <div class="app-wrapper">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="brand-area">
+        <h1>Olist Executive Analytics Platform</h1>
+        <p>Evidence-Based E-Commerce Performance & Logistics Risk Audit | Data Range: <strong>2016-09-04 to 2018-10-17</strong> (N = 99,441 Orders)</p>
+      </div>
+      <div class="header-controls">
+        <button class="btn-methodology" id="btnMethodology">View Methodology & Definitions</button>
+        <span class="badge-version">Validated Pipeline v1.0</span>
+      </div>
+    </header>
+
+    <!-- Global Interactive Filter Bar -->
+    <div class="filter-bar">
+      <div class="filter-group">
+        <label for="filterState">State:</label>
+        <select id="filterState" class="filter-select">
+          <option value="ALL">All States (27)</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label for="filterCategory">Category:</label>
+        <select id="filterCategory" class="filter-select">
+          <option value="ALL">All Categories (71)</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label for="filterStatus">Delivery Status:</label>
+        <select id="filterStatus" class="filter-select">
+          <option value="ALL">All Delivery Statuses</option>
+          <option value="delivered">Delivered Only</option>
+          <option value="late">Late Delivered</option>
+          <option value="undelivered">Undelivered / Canceled</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label for="filterSeller">Seller Segment:</label>
+        <select id="filterSeller" class="filter-select">
+          <option value="ALL">All Sellers (3,095)</option>
+          <option value="top10">Top 10% Volume Sellers (67.5% GMV)</option>
+          <option value="slow">Slow Dispatch (&gt;5 Days)</option>
+        </select>
+      </div>
+
+      <button class="btn-reset-filters" id="btnResetFilters">Reset Filters</button>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <nav class="nav-tabs">
+      <button class="nav-tab active" data-tab="overview">Overview</button>
+      <button class="nav-tab" data-tab="delivery">Delivery</button>
+      <button class="nav-tab" data-tab="geography">Geography</button>
+      <button class="nav-tab" data-tab="categories">Categories</button>
+      <button class="nav-tab" data-tab="sellers">Sellers</button>
+      <button class="nav-tab" data-tab="payments">Payments</button>
+      <button class="nav-tab" data-tab="rootcause">Root Cause</button>
+      <button class="nav-tab" data-tab="recommendations">Recommendations</button>
+    </nav>
+
+    <!-- Top KPI Bar -->
+    <div class="kpi-grid">
+      <div class="kpi-card orders">
+        <span class="kpi-title">Total Orders</span>
+        <span class="kpi-num" id="kpiOrdersNum">99,441</span>
+        <span class="kpi-sub" id="kpiOrdersSub">1 Row = 1 Order Analytical Grain</span>
+      </div>
+      <div class="kpi-card revenue">
+        <span class="kpi-title">Total Revenue</span>
+        <span class="kpi-num" id="kpiRevenueNum">R$ 15.84M</span>
+        <span class="kpi-sub" id="kpiRevenueSub">R$ 13.59M Items + R$ 2.25M Freight</span>
+      </div>
+      <div class="kpi-card review">
+        <span class="kpi-title">Average Review Score</span>
+        <span class="kpi-num" id="kpiReviewNum">4.07 / 5.0</span>
+        <span class="kpi-sub" id="kpiReviewSub">Platform Benchmark (N = 99,441)</span>
+      </div>
+      <div class="kpi-card lowrate">
+        <span class="kpi-title">Low Rating Rate (1-2 Stars)</span>
+        <span class="kpi-num" id="kpiLowRateNum">15.09%</span>
+        <span class="kpi-sub" id="kpiLowRateSub">15,010 Low-Rated Orders</span>
+      </div>
+      <div class="kpi-card late">
+        <span class="kpi-title">Late Delivery Rate</span>
+        <span class="kpi-num" id="kpiLateNum">8.11%</span>
+        <span class="kpi-sub" id="kpiLateSub">7,826 Late Delivered Orders</span>
+      </div>
+    </div>
+
+    <!-- VIEW 1: OVERVIEW -->
+    <div class="tab-view active" id="view-overview">
+      <!-- 60-Second Executive Story Digest -->
+      <div class="key-insight-banner executive-digest-banner">
+        <span class="insight-icon">⚡</span>
+        <div class="insight-content">
+          <h4>60-Second Executive Digest &mdash; Final Analytical Story</h4>
+          <p>
+            <strong>1. Marketplace Growth &amp; Rating Stability:</strong> Platform order volume expanded <strong>+714%</strong> (from 788 to 7,380 peak monthly orders, N = 99,441 orders, R$ 15.84M GMV) without overall review score degradation (baseline 4.07 stars, volume correlation r = -0.13). Score dips correlate directly with monthly late delivery spikes (r = +0.79).<br>
+            <strong>2. Primary Dissatisfaction Factor:</strong> Passing promised delivery date is strongly associated with a <strong>5.76x risk multiplier</strong> in low ratings (54.64% low-rating rate for late delivered orders vs 9.49% for on-time orders, N = 96,470 delivered orders). Severe delay (&ge;4 days late) is associated with a 75.09% low-rating rate (4.97x Relative Risk vs 15.09% platform baseline).<br>
+            <strong>3. Regional &amp; Category Hotspots:</strong> 70.6% of sellers operate in SP, resulting in 64.0% cross-state orders (+74.4% freight cost, +90.6% lead time). Route <code>SP -&gt; RJ</code> (N = 8,431) exhibits a 14.99% late delivery rate and 22.57% low-rating rate. Heavy category <code>office_furniture</code> (N = 1,264) is the worst outlier (3.62 stars, 22.63% low rating, R$ 53.98 average freight).<br>
+            <strong>4. Evidence-Based Priorities:</strong> (1) Inject +3-4 day dynamic route buffers for <code>SP -&gt; RJ</code>; (2) Enforce mandatory 3-day seller dispatch SLAs (N = 14,180 slow orders &gt;5 days); (3) Partner with specialized heavy-goods logistics carriers for bulky furniture categories.
+          </p>
+        </div>
+      </div>
+
+      <div class="key-insight-banner">
+        <span class="insight-icon">💡</span>
+        <div class="insight-content">
+          <h4>Key Insight &amp; Observational Relationship &mdash; Overview</h4>
+          <p>Rapid marketplace scale expansion (+714% order growth) occurred <strong>without overall review score degradation</strong> (r = -0.1266). Monthly average review score drops correlate strictly in lockstep with monthly late delivery rate spikes (r = +0.7940).</p>
+          <span class="observational-tag">Observational Association (Non-Causal)</span>
+        </div>
+      </div>
+
+      <div class="grid-2col">
+        <div class="card">
+          <div class="card-title">Monthly Marketplace Volume Scaling &amp; Review Score Trend</div>
+          <div class="card-meta">
+            <span>Source: <code>q1_monthly_performance.csv</code></span>
+            <span>N = 99,441 Orders</span>
+          </div>
+          <div class="chart-box">
+            <canvas id="chartOverviewMonthly"></canvas>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Platform Review Score Rating Distribution (1 to 5 Stars)</div>
+          <div class="card-meta">
+            <span>Source: <code>q6_review_score_distribution.csv</code></span>
+            <span>N = 99,441 Orders</span>
+          </div>
+          <div class="chart-box">
+            <canvas id="chartOverviewScoreDist"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW 2: DELIVERY -->
+    <div class="tab-view" id="view-delivery">
+      <div class="key-insight-banner">
+        <span class="insight-icon">🚚</span>
+        <div class="insight-content">
+          <h4>Key Insight &amp; Observational Relationship &mdash; Delivery Performance</h4>
+          <p>Passing promised delivery date is strongly associated with a <strong>5.76x risk multiplier</strong> in customer dissatisfaction (54.64% low ratings for late orders vs 9.49% for on-time orders). At &ge;4 days late, satisfaction degrades sharply with <strong>75.09% of orders receiving 1-2 stars (4.97x Relative Risk)</strong>.</p>
+          <span class="observational-tag">Observational Delivery Relationship | Note: Delivered orders evaluation (N = 96,470) excludes 2,971 undelivered/canceled orders.</span>
+        </div>
+      </div>
+
+      <!-- Delivery Visual Story Cards -->
+      <div class="grid-3col" style="margin-bottom: 16px;">
+        <div class="metric-summary-card green">
+          <span class="m-label">On-Time Delivery (Delay &le; 0d)</span>
+          <span class="m-value">9.49% Low Rating</span>
+          <span class="m-sub">4.28 Stars Avg | N = 88,644 Orders</span>
+        </div>
+        <div class="metric-summary-card amber">
+          <span class="m-label">Late Delivery (Delay &gt; 0d)</span>
+          <span class="m-value">54.64% Low Rating</span>
+          <span class="m-sub">2.55 Stars Avg | N = 7,826 Orders (3.62x Risk)</span>
+        </div>
+        <div class="metric-summary-card rose">
+          <span class="m-label">Severe Delay (Delay &ge; 4d)</span>
+          <span class="m-value">75.09% Low Rating</span>
+          <span class="m-sub">1.84 Stars Avg | N = 4,664 Orders (4.97x Risk)</span>
+        </div>
+      </div>
+
+      <div class="grid-2col">
+        <div class="card">
+          <div class="card-title">Low Rating Rate (%) across Delivery Delay Severity Buckets</div>
+          <div class="card-meta">
+            <span>Source: <code>q2_review_score_by_delay_bucket.csv</code></span>
+            <span>N = 96,470 Delivered Orders</span>
+          </div>
+          <div class="chart-box">
+            <canvas id="chartDeliveryBuckets"></canvas>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Top Customer States by Late Delivery Rate (%) &amp; Review Impact</div>
+          <div class="card-meta">
+            <span>Source: <code>q2_state_delivery_interaction.csv</code></span>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>State</th>
+                  <th>Total Orders</th>
+                  <th>Delivered</th>
+                  <th>Late Rate %</th>
+                  <th>Avg Lead Time</th>
+                  <th>Avg Score</th>
+                  <th>Low Rating %</th>
+                </tr>
+              </thead>
+              <tbody id="tbodyDeliveryState"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Interactive "What-If" Logistics Policy Simulator -->
+      <div class="card card-full" style="margin-top: 16px; border: 1px solid var(--accent-cyan);" id="simLogisticsContainer">
+        <div class="card-title" style="display: flex; justify-content: space-between; align-items: center;">
+          <span style="display: flex; align-items: center; gap: 8px; color: var(--accent-cyan); font-size: 1.05rem;">
+            <span>🎛️</span> Interactive "What-If" Logistics Policy Simulator
+          </span>
+          <span class="badge badge-green">Real-Time Engine Active</span>
+        </div>
+        <div class="card-meta">
+          <span>Simulate operational policy interventions across filtered orders to project customer score recovery and saved revenue.</span>
+        </div>
+        
+        <div class="grid-2col" style="margin-top: 12px; gap: 20px;">
+          <!-- Controls Panel -->
+          <div style="background: rgba(15, 23, 42, 0.6); padding: 16px; border-radius: 8px; border: 1px solid var(--border-card);">
+            <div style="margin-bottom: 16px;">
+              <label for="simBufferDays" style="display: flex; justify-content: space-between; font-weight: 700; margin-bottom: 6px; font-size: 0.85rem; color: var(--text-primary);">
+                <span>1. Inject Route Buffer Days:</span>
+                <span id="simBufferDaysVal" style="color: var(--accent-cyan);">+3 Days</span>
+              </label>
+              <input type="range" id="simBufferDays" min="0" max="7" value="3" step="1" style="width: 100%; cursor: pointer;">
+              <span style="font-size: 0.75rem; color: var(--text-dim);">Extends estimated delivery promise window to eliminate false lateness penalties.</span>
+            </div>
+
+            <div>
+              <label for="simDispatchSLA" style="display: flex; justify-content: space-between; font-weight: 700; margin-bottom: 6px; font-size: 0.85rem; color: var(--text-primary);">
+                <span>2. Max Seller Dispatch SLA Cap:</span>
+                <span id="simDispatchSLAVal" style="color: var(--accent-cyan);">3 Days</span>
+              </label>
+              <input type="range" id="simDispatchSLA" min="1" max="10" value="3" step="1" style="width: 100%; cursor: pointer;">
+              <span style="font-size: 0.75rem; color: var(--text-dim);">Enforces carrier handoff within N days to eliminate seller warehouse lag.</span>
+            </div>
+          </div>
+
+          <!-- Projected Impact Metrics Grid -->
+          <div class="grid-2col" style="gap: 12px;">
+            <div class="metric-summary-card green">
+              <span class="m-label">Projected Late Rate</span>
+              <span class="m-value" id="simLateRateVal">2.45%</span>
+              <span class="m-sub" id="simLateRateSub">Baseline: 8.11% (-5.66 pp)</span>
+            </div>
+            <div class="metric-summary-card blue">
+              <span class="m-label">Projected Avg Review</span>
+              <span class="m-value" id="simAvgReviewVal">4.24 Stars</span>
+              <span class="m-sub" id="simAvgReviewSub">Baseline: 4.07 (+0.17 Stars)</span>
+            </div>
+            <div class="metric-summary-card amber">
+              <span class="m-label">1-Star Reviews Prevented</span>
+              <span class="m-value" id="simLowAvoidedVal">3,850 Orders</span>
+              <span class="m-sub">Low-rating reduction</span>
+            </div>
+            <div class="metric-summary-card green">
+              <span class="m-label">Protected GMV Value</span>
+              <span class="m-value" id="simGmvSavedVal">R$ 485.2K</span>
+              <span class="m-sub">Preserved order revenue</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW 3: GEOGRAPHY -->
+    <div class="tab-view" id="view-geography">
+      <div class="key-insight-banner">
+        <span class="insight-icon">🌎</span>
+        <div class="insight-content">
+          <h4>Key Insight &amp; Observational Relationship &mdash; Geographic Logistics Dynamics</h4>
+          <p>Geographic supply concentration in São Paulo (70.57% of sellers) forces 64.04% of orders to cross state borders (N = 63,183). Inter-state shipping imposes a <strong>+74.4% freight cost surcharge</strong> (R$ 24.58 vs R$ 14.09) and a <strong>+90.6% lead time lag</strong> (+7.2 days). Route <code>SP -&gt; RJ</code> represents a major bottleneck (14.99% late delivery rate, 22.57% low rating rate).</p>
+          <span class="observational-tag">Observational Regional Corridor Association</span>
+        </div>
+      </div>
+
+      <div class="grid-2col">
+        <div class="card">
+          <div class="card-title">Inter-State vs. Intra-State Freight Cost &amp; Delivery Lead Time</div>
+          <div class="card-meta">
+            <span>Source: <code>q3_interstate_vs_intrastate_metrics.csv</code></span>
+          </div>
+          <div class="chart-box">
+            <canvas id="chartGeoScope"></canvas>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">High-Volume Inter-State Shipping Route Hotspots (Seller State &rarr; Customer State)</div>
+          <div class="card-meta">
+            <span>Source: <code>q3_hotspots.csv</code></span>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Route</th>
+                  <th>Orders</th>
+                  <th>Total GMV</th>
+                  <th>Avg Freight</th>
+                  <th>Lead Time</th>
+                  <th>Late Rate %</th>
+                  <th>Avg Score</th>
+                  <th>Low Rating %</th>
+                </tr>
+              </thead>
+              <tbody id="tbodyGeoHotspots"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW 4: CATEGORIES -->
+    <div class="tab-view" id="view-categories">
+      <div class="key-insight-banner">
+        <span class="insight-icon">📦</span>
+        <div class="insight-content">
+          <h4>Key Insight &amp; Observational Relationship &mdash; Product Categories</h4>
+          <p>Standard e-commerce categories (<code>health_beauty</code>, <code>sports_leisure</code>, <code>toys</code>) achieve high volume and satisfaction (&ge;4.11 stars). Heavy, bulky categories (<code>office_furniture</code>) represent severe fulfillment outliers: <strong>3.62 stars, 22.63% low ratings, R$ 53.98 average freight (+136.5%), and 20.71-day lead time</strong>.</p>
+          <span class="observational-tag">Observational Category Metric</span>
+        </div>
+      </div>
+
+      <!-- Priority Category Matrix Summary Cards -->
+      <div class="grid-4col" style="margin-bottom: 16px;">
+        <div class="matrix-quad-card red-border">
+          <span class="quad-title">High Volume + Low Satisfaction</span>
+          <span class="quad-badge rose">CRITICAL FOCUS</span>
+          <p><code>office_furniture</code>, <code>furniture_decor</code>, <code>computer_accessories</code></p>
+        </div>
+        <div class="matrix-quad-card green-border">
+          <span class="quad-title">High Volume + High Satisfaction</span>
+          <span class="quad-badge green">CHAMPIONS</span>
+          <p><code>health_beauty</code>, <code>sports_leisure</code>, <code>toys</code>, <code>luggage_accessories</code></p>
+        </div>
+        <div class="matrix-quad-card amber-border">
+          <span class="quad-title">Low Volume + Low Satisfaction</span>
+          <span class="quad-badge amber">NICHE RISKS</span>
+          <p><code>diapers_and_hygiene</code>, <code>la_cuisine</code>, <code>fashio_female_clothing</code></p>
+        </div>
+        <div class="matrix-quad-card blue-border">
+          <span class="quad-title">Low Volume + High Satisfaction</span>
+          <span class="quad-badge blue">NICHE PERFORMERS</span>
+          <p><code>books_general</code>, <code>flowers</code>, <code>cds_dvds_musicals</code></p>
+        </div>
+      </div>
+
+      <div class="grid-2col">
+        <div class="card">
+          <div class="card-title">Category Freight Cost (R$) vs. Low Rating Rate (%) Bubble Matrix</div>
+          <div class="card-meta">
+            <span>Source: <code>q4_priority_categories.csv</code></span>
+            <span>Bubble Size = Order Volume</span>
+          </div>
+          <div class="chart-box">
+            <canvas id="chartCatScatter"></canvas>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Priority Category Performance Breakdown</div>
+          <div class="card-meta">
+            <span>Source: <code>q4_category_analysis.csv</code></span>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Category</th>
+                  <th>Segment</th>
+                  <th>Orders</th>
+                  <th>GMV</th>
+                  <th>Avg Price</th>
+                  <th>Avg Freight</th>
+                  <th>Avg Score</th>
+                  <th>Low Rating %</th>
+                </tr>
+              </thead>
+              <tbody id="tbodyCategoryAnalysis"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW 5: SELLERS -->
+    <div class="tab-view" id="view-sellers">
+      <div class="key-insight-banner">
+        <span class="insight-icon">🏪</span>
+        <div class="insight-content">
+          <h4>Key Insight &amp; Observational Relationship &mdash; Seller SLA Health Scorecard</h4>
+          <p>Seller warehouse dispatch lag (>3 days) is the single largest controllable driver of customer dissatisfaction. <strong>200 sellers achieve Grade A+ (Elite Champions)</strong> with 4.71-star baseline ratings, while <strong>512 Grade F sellers (16.6%)</strong> require automated dispatch SLA enforcement and onboarding retraining.</p>
+          <span class="observational-tag">Seller Governance Framework | 3,085 Active Sellers Audited</span>
+        </div>
+      </div>
+
+      <!-- Seller Health Summary Cards -->
+      <div class="grid-4col" style="margin-bottom: 16px;">
+        <div class="metric-summary-card green">
+          <span class="m-label">Grade A+ (Elite Champions)</span>
+          <span class="m-value">200 Sellers</span>
+          <span class="m-sub">4.71 Stars Avg | 94.2% SLA</span>
+        </div>
+        <div class="metric-summary-card blue">
+          <span class="m-label">Grade A (High Performers)</span>
+          <span class="m-value">288 Sellers</span>
+          <span class="m-sub">4.41 Stars Avg | 86.8% SLA</span>
+        </div>
+        <div class="metric-summary-card amber">
+          <span class="m-label">Grade C (At Risk)</span>
+          <span class="m-value">801 Sellers</span>
+          <span class="m-sub">4.14 Stars Avg | R$ 7.5M GMV</span>
+        </div>
+        <div class="metric-summary-card rose">
+          <span class="m-label">Grade F (Critical Retraining)</span>
+          <span class="m-value">512 Sellers</span>
+          <span class="m-sub">3.54 Stars Avg | 16.6% Network</span>
+        </div>
+      </div>
+
+      <div class="grid-2col">
+        <div class="card">
+          <div class="card-title">Low Rating Rate (%) by Seller Carrier Handoff Dispatch Window</div>
+          <div class="card-meta">
+            <span>Source: <code>root_cause_evidence.csv</code></span>
+            <span>N = 99,441 Orders</span>
+          </div>
+          <div class="chart-box">
+            <canvas id="chartSellerDispatch"></canvas>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Seller Volume &amp; Performance Summary by State</div>
+          <div class="card-meta">
+            <span>Source: <code>q3_seller_geo.csv</code></span>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Seller State</th>
+                  <th>Sellers</th>
+                  <th>Orders</th>
+                  <th>Total GMV</th>
+                  <th>Avg Freight</th>
+                  <th>Avg Score</th>
+                  <th>Low Rating %</th>
+                </tr>
+              </thead>
+              <tbody id="tbodySellerDist"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW 6: PAYMENTS -->
+    <div class="tab-view" id="view-payments">
+      <div class="key-insight-banner">
+        <span class="insight-icon">💳</span>
+        <div class="insight-content">
+          <h4>Key Insight &amp; Observational Relationship &mdash; Payment Behavior</h4>
+          <p>Credit Card accounts for <strong>75.40% of orders and 78.35% of platform revenue</strong>. Installments act as a basket size catalyst: AOV scales from R$ 100.91 (1-pay) up to <strong>R$ 336.44 (7–10 pay, 3.33x AOV multiplier)</strong>. Boleto payments exhibit higher late rates (8.88% vs 7.96%) due to 1-2 day bank clearance lags.</p>
+          <span class="observational-tag">Non-Causal Note: Installment count correlation with low ratings reflects item price/complexity, not direct payment causality.</span>
+        </div>
+      </div>
+
+      <div class="grid-2col">
+        <div class="card">
+          <div class="card-title">Primary Payment Method Share (%) &amp; Order Volume</div>
+          <div class="card-meta">
+            <span>Source: <code>q5_payment_method_distribution.csv</code></span>
+          </div>
+          <div class="chart-box">
+            <canvas id="chartPaymentShares"></canvas>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Credit Card Installment Tier vs. Average Order Value (AOV R$) &amp; Low Rating %</div>
+          <div class="card-meta">
+            <span>Source: <code>q5_credit_card_installments.csv</code></span>
+          </div>
+          <div class="chart-box">
+            <canvas id="chartPaymentInstallments"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW 7: ROOT CAUSE -->
+    <div class="tab-view" id="view-rootcause">
+      <div class="key-insight-banner">
+        <span class="insight-icon">🔬</span>
+        <div class="insight-content">
+          <h4>Key Insight &amp; Empirical Root-Cause Classification Hierarchy</h4>
+          <p>Customer dissatisfaction is overwhelmingly driven by <strong>logistics SLA breaches (delivery delay)</strong> and physical product defects/damage. Hypothesized commercial friction points like high freight cost ratios (&gt;50%) or Boleto payments exhibit <strong>zero direct negative impact</strong> on customer review scores.</p>
+          <span class="observational-tag">Grounded in Validated Dataset (N = 99,441 Orders) &amp; Review Text Comments (N = 6,742)</span>
+        </div>
+      </div>
+
+      <!-- Root Cause Evidence Table -->
+      <div class="card card-full" style="margin-bottom: 16px;">
+        <div class="card-title">Empirical Root-Cause Classification Evidence Matrix</div>
+        <div class="card-meta">
+          <span>Source: <code>root_cause_evidence.csv</code> (Platform Baseline Low-Rating Rate: 15.09%)</span>
+        </div>
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Tier / Classification</th>
+                <th>Factor / Segment Name</th>
+                <th>Sample Size (N)</th>
+                <th>Avg Review Score</th>
+                <th>Low Rating %</th>
+                <th>Abs Difference (pp)</th>
+                <th>Relative Risk Ratio</th>
+              </tr>
+            </thead>
+            <tbody id="tbodyRootCauseFull"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Text Mining Keyphrase Breakdown Card -->
+      <div class="card card-full">
+        <div class="card-title">Review Text Keyphrase Extraction Theme Breakdown (N = 6,742 Low-Rated Comments)</div>
+        <div class="card-meta">
+          <span>Source: <code>q6_complaint_themes.csv</code></span>
+        </div>
+        <div class="grid-3col" style="margin-top: 12px;">
+          <div class="metric-summary-card rose">
+            <span class="m-label">1. Logistics &amp; Non-Delivery / Delay</span>
+            <span class="m-value">56.38% of Comments</span>
+            <span class="m-sub">Triggers: "não recebi", "atraso", "demora", "prazo"</span>
+          </div>
+          <div class="metric-summary-card amber">
+            <span class="m-label">2. Product Defect &amp; Packaging Damage</span>
+            <span class="m-value">57.50% of Comments</span>
+            <span class="m-sub">Triggers: "defeito", "quebrado", "ruim", "qualidade"</span>
+          </div>
+          <div class="metric-summary-card blue">
+            <span class="m-label">3. Seller &amp; Support Failure</span>
+            <span class="m-value">22.07% of Comments</span>
+            <span class="m-sub">Triggers: "cancelar", "atendimento", "vendedor", "contato"</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW 8: RECOMMENDATIONS -->
+    <div class="tab-view" id="view-recommendations">
+      <div class="key-insight-banner">
+        <span class="insight-icon">🏆</span>
+        <div class="insight-content">
+          <h4>Key Insight &amp; Strategic Executive Action Plan</h4>
+          <p>Remediation resources must be focused 100% on fulfillment SLA enforcement and carrier handling rather than pricing adjustments or payment method restrictions. Delivery delay is the primary driver of bad reviews; freight ratios exhibit <strong>zero direct negative impact</strong>.</p>
+          <span class="observational-tag">Evidence-Based Executive Priorities</span>
+        </div>
+      </div>
+
+      <div class="rec-grid">
+        <div class="rec-card">
+          <span class="rec-rank">Action #1</span>
+          <h3>Dynamic Delivery Date Buffer Adjustments for Cross-State Shipping (<code>SP -&gt; RJ</code>)</h3>
+          <p>Inject <strong>+3 to +4 business day transit buffers</strong> into estimated delivery dates for cross-state orders into Rio de Janeiro (N = 8,431). Eliminates artificial SLA breaches caused by carrier route delays.</p>
+          <div class="rec-impact">• Projected Impact: Saves affected orders from 54.64% late low-rating risk down to 9.49% on-time baseline (-45.15 pp drop).</div>
+        </div>
+
+        <div class="rec-card">
+          <span class="rec-rank">Action #2</span>
+          <h3>Upstream Seller Dispatch SLA Enforcement (Mandatory 3-Day Limit)</h3>
+          <p>Enforce strict seller carrier dispatch SLAs at Day 3. Automatically alert sellers at Day 2 and penalize slow dispatchers exceeding 5 days (N = 14,180 orders) to protect transit buffers.</p>
+          <div class="rec-impact">• Projected Impact: Reduces low-rating probability by -9.84 pp (from 22.26% down to 12.42%) for slow-dispatch orders.</div>
+        </div>
+
+        <div class="rec-card">
+          <span class="rec-rank">Action #3</span>
+          <h3>Specialized Bulky-Goods Carrier Strategy for <code>office_furniture</code></h3>
+          <p>Partner with specialized heavy-goods logistics carriers, mandate reinforced packaging standards, and set realistic 20+ day delivery estimates for heavy furniture (N = 7,615 orders).</p>
+          <div class="rec-impact">• Projected Impact: Recovers <code>office_furniture</code> rating (3.62 stars &rarr; 4.07 stars) and protects R$ 273.2K GMV.</div>
+        </div>
+      </div>
+
+      <div class="card card-full" style="margin-top: 16px;">
+        <div class="card-title">Empirical Root-Cause Classification Evidence Matrix</div>
+        <div class="card-meta">
+          <span>Source: <code>root_cause_evidence.csv</code> (N = 99,441 Reviewed Orders)</span>
+        </div>
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Tier</th>
+                <th>Factor / Segment</th>
+                <th>Sample Size (N)</th>
+                <th>Avg Review</th>
+                <th>Low Rating %</th>
+                <th>Abs Diff (pp)</th>
+                <th>Relative Risk</th>
+              </tr>
+            </thead>
+            <tbody id="tbodyRootCauseEvidence"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Methodology Overlay Modal -->
+  <div class="modal-overlay" id="modalMethodology">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2>Data Methodology, Definitions &amp; Audit Scope</h2>
+        <button class="btn-close-modal" id="btnCloseModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <h4>1. Primary Analytical Grain</h4>
+        <p>The central analytical grain of this platform is <strong>1 row = 1 order</strong> (N = 99,441 master order rows). All relational joins across the 9 raw CSV datasets were aggregated to the order level prior to joining to prevent record multiplication or fan-out errors (100% audit pass across 6 merges with 0 duplicate rows).</p>
+        
+        <h4>2. Relational Aggregation Protocols</h4>
+        <ul>
+          <li><strong>Item Aggregation (<code>order_items</code>)</strong>: Item prices and freight costs were summed per order. Primary product category and seller state attributes were derived via deterministic primary item selection (<code>.first()</code>).</li>
+          <li><strong>Payment Aggregation (<code>order_payments</code>)</strong>: Total payment value was summed per order. Primary payment type was assigned based on highest value share, and installment count was assigned as the maximum installment value per order.</li>
+          <li><strong>Review Aggregation (<code>order_reviews</code>)</strong>: Joined 1:1 on <code>order_id</code> (N = 99,224 valid review scores).</li>
+          <li><strong>Customer Tracking</strong>: Unique customer identity tracked via <code>customer_unique_id</code> to evaluate repeat purchase behavior.</li>
+          <li><strong>Spatial Geolocation Deduplication</strong>: 5-digit CEP (ZIP) prefixes were deduplicated by computing spatial median latitude and longitude coordinates per prefix prior to location matching.</li>
+        </ul>
+
+        <h4>3. Delivered-Only Delivery Analysis Scoping</h4>
+        <p>Delivery duration, transit lead times, and late delivery flags (<code>is_late</code>) were calculated strictly on the delivered order population (N = 96,470), excluding 2,971 canceled or undelivered orders to prevent missing timestamp bias.</p>
+
+        <h4>4. Key Metric Definitions</h4>
+        <ul>
+          <li><strong>Late Delivery Flag (<code>is_late</code>)</strong>: 1 if <code>order_delivered_customer_date &gt; order_estimated_delivery_date</code>, 0 otherwise.</li>
+          <li><strong>Low Rating Flag (<code>is_low_review</code>)</strong>: 1 if customer review score is 1 or 2 stars, 0 otherwise.</li>
+          <li><strong>Freight Burden Ratio</strong>: <code>total_freight / total_price</code>.</li>
+          <li><strong>Relative Risk Ratio</strong>: <code>Segment Low Rating Rate / Platform Baseline Low Rating Rate (15.09%)</code>.</li>
+        </ul>
+
+        <h4>5. Strict Observational / Non-Causal Framing Disclaimer</h4>
+        <p>All relationships displayed in this platform represent <strong>observational associations</strong> derived from historical transaction metadata. No causal claims are asserted without experimental counterfactuals.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Interactive Order Drill-Down Drawer / Modal -->
+  <div class="modal-overlay" id="modalDrillDown">
+    <div class="modal-card modal-card-large">
+      <div class="modal-header">
+        <div>
+          <h2 id="drillDownTitle">Entity Drill-Down Analysis</h2>
+          <p id="drillDownSub" style="color: var(--text-muted); font-size: 0.85rem; margin-top: 2px;">Order-level deep dive & real-time metric breakdown</p>
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <button class="btn-primary-action" id="btnApplyDrillDownFilter">Apply as Active Filter</button>
+          <button class="btn-close-modal" id="btnCloseDrillDownModal">&times;</button>
+        </div>
+      </div>
+      <div class="modal-body" style="padding-top: 12px;">
+        <!-- Drill-Down KPI Cards -->
+        <div class="grid-4col" style="margin-bottom: 16px;">
+          <div class="metric-summary-card">
+            <span class="m-label">Selected Orders</span>
+            <span class="m-value" id="drillDownOrders">-</span>
+            <span class="m-sub" id="drillDownOrdersSub">Filtered count</span>
+          </div>
+          <div class="metric-summary-card">
+            <span class="m-label">Total Revenue</span>
+            <span class="m-value" id="drillDownRevenue">-</span>
+            <span class="m-sub">GMV + Freight</span>
+          </div>
+          <div class="metric-summary-card">
+            <span class="m-label">Avg Review Score</span>
+            <span class="m-value" id="drillDownReview">-</span>
+            <span class="m-sub" id="drillDownReviewSub">Star Rating</span>
+          </div>
+          <div class="metric-summary-card rose">
+            <span class="m-label">Late Delivery Rate</span>
+            <span class="m-value" id="drillDownLate">-</span>
+            <span class="m-sub" id="drillDownLateSub">Delivered orders</span>
+          </div>
+        </div>
+
+        <!-- Customer Complaint Themes Feed -->
+        <div id="drillDownComplaintBox" style="margin-bottom: 16px; background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 8px; padding: 12px 16px;">
+          <h4 style="margin: 0 0 6px 0; color: var(--accent-rose); font-size: 0.9rem; display: flex; align-items: center; gap: 6px;">
+            <span>💬</span> Key Customer Complaint & Feedback Themes
+          </h4>
+          <p id="drillDownComplaintText" style="margin: 0; font-size: 0.85rem; color: #f87171; line-height: 1.4;">
+            Loading feedback drivers...
+          </p>
+        </div>
+
+        <!-- Sample Order Inspection Table -->
+        <h4 style="margin: 0 0 10px 0; font-size: 0.95rem; color: var(--text-primary);">Sample Matching Orders (Top 15 Records)</h4>
+        <div class="table-responsive" style="max-height: 260px; overflow-y: auto;">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Customer State</th>
+                <th>Seller State</th>
+                <th>Category</th>
+                <th>Status</th>
+                <th>Review Score</th>
+                <th>Late?</th>
+                <th>Revenue (R$)</th>
+              </tr>
+            </thead>
+            <tbody id="tbodyDrillDownOrders"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

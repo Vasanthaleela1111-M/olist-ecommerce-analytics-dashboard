@@ -1,0 +1,10 @@
+dataset,total_rows,total_columns,primary_key_column,unique_keys,null_values_total,null_columns_count,duplicate_full_rows
+orders,99441,8,order_id,99441,4908,3,0
+order_items,112650,6,order_id,98666,0,0,0
+order_payments,103886,5,order_id,99440,0,0,0
+order_reviews,100000,7,review_id,99173,146532,2,0
+customers,99441,5,customer_id,99441,0,0,0
+products,32951,9,product_id,32951,2448,8,0
+sellers,3095,4,seller_id,3095,0,0,0
+geolocation,1000163,5,geolocation_zip_code_prefix,19015,0,0,261836
+category_translation,71,2,product_category_name,71,0,0,0

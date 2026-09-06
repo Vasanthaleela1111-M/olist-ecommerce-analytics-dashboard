@@ -1,0 +1,28 @@
+factor_category,segment_definition,sample_size_n,avg_review_score,low_rating_count,low_rating_rate_pct,baseline_low_rate_pct,abs_diff_pct_pts,relative_risk_ratio
+Delivery Delay,On-Time / Early Delivery (Delay <= 0 days),88644,4.2834,8416,9.49,15.09,-5.6,0.63
+Delivery Delay,Late Delivery (Delay > 0 days),7826,2.545,4276,54.64,15.09,39.54,3.62
+Delivery Delay,Severe Late Delivery (Delay >= 4 days),4664,1.8437,3502,75.09,15.09,59.99,4.97
+Delivery Delay,Extreme Late Delivery (Delay >= 10 days),2299,1.6933,1826,79.43,15.09,64.33,5.26
+Seller Execution,Fast Seller Dispatch (Carrier dispatch <= 5 days),83464,4.1779,10366,12.42,15.09,-2.67,0.82
+Seller Execution,Slow Seller Dispatch (Carrier dispatch > 5 days),14180,3.7525,3157,22.26,15.09,7.17,1.47
+Seller Execution,Extreme Slow Seller Dispatch (> 10 days),3425,3.2768,1156,33.75,15.09,18.66,2.24
+Category Hotspots,Outlier Category: office_furniture,1264,3.6187,286,22.63,15.09,7.53,1.5
+Category Hotspots,Outlier Category: audio,348,3.8247,77,22.13,15.09,7.03,1.47
+Category Hotspots,High-Volume Friction: bed_bath_table,9299,3.9586,1588,17.08,15.09,1.98,1.13
+Category Hotspots,High-Volume Friction: furniture_decor,6351,4.0109,1057,16.64,15.09,1.55,1.1
+Category Hotspots,High-Volume Winner: health_beauty,8803,4.169,1141,12.96,15.09,-2.13,0.86
+Category Hotspots,High-Volume Winner: luggage_accessories,1028,4.3317,94,9.14,15.09,-5.95,0.61
+Geography,Intra-State Shipping (Customer state = Seller state),35483,4.1949,4356,12.28,15.09,-2.82,0.81
+Geography,Inter-State Shipping (Customer state != Seller state),63183,4.03,10036,15.88,15.09,0.79,1.05
+Geography,Hotspot Route: SP Seller -> RJ Customer,8431,3.7961,1903,22.57,15.09,7.48,1.5
+Freight Burden,Normal Freight Ratio (Freight <= 50% of price),83056,4.0978,12008,14.46,15.09,-0.64,0.96
+Freight Burden,High Freight Ratio (Freight > 50% of price),15610,4.044,2384,15.27,15.09,0.18,1.01
+Order Value,Low Item Price (< R$ 50),29393,4.1559,3716,12.64,15.09,-2.45,0.84
+Order Value,Medium Item Price (R$ 50 - R$ 200),54281,4.0908,7889,14.53,15.09,-0.56,0.96
+Order Value,High Item Price (> R$ 200),14992,3.9534,2787,18.59,15.09,3.5,1.23
+Payment Behavior,Credit Card: 1 Installment (Single Pay),24004,4.1415,3210,13.37,15.09,-1.72,0.89
+Payment Behavior,Credit Card: High Installments (7-10 Installments),11819,3.9826,2107,17.83,15.09,2.73,1.18
+Payment Behavior,Credit Card: Extreme Installments (11+ Installments),341,3.8446,74,21.7,15.09,6.61,1.44
+Payment Behavior,Boleto Bancario Payment,19784,4.0714,2938,14.85,15.09,-0.24,0.98
+Customer Behavior,First-Time Customer (Single order),93099,4.0685,14071,15.11,15.09,0.02,1.0
+Customer Behavior,Repeat Customer (Multiple orders),6342,4.1042,939,14.81,15.09,-0.29,0.98

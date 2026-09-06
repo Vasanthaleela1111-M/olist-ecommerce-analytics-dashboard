@@ -1,0 +1,11 @@
+operational_factor,sample_size_n,low_review_rate_pct,relative_risk_vs_baseline
+Baseline Marketplace Average,99441,15.09,1.0
+Delivery Status: On-Time / Early,88644,9.49,0.63
+Delivery Status: Late (Delivered after estimated date),7826,54.64,3.62
+Delivery Status: Severe Late (>= 4 days late),4664,75.09,4.97
+Seller Dispatch: Fast (<= 5 days to carrier),83464,12.42,0.82
+Seller Dispatch: Slow (> 5 days to carrier),14180,22.26,1.47
+Freight Burden: Normal (Freight <= 50% of price),83056,14.46,0.96
+Freight Burden: High (Freight > 50% of price),15610,15.27,1.01
+Shipping Scope: Intra-State (Same state),35483,12.28,0.81
+Shipping Scope: Inter-State (Cross-state),63183,15.88,1.05

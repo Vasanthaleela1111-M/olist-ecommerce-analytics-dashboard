@@ -1,0 +1,99 @@
+{
+  "joins": [
+    {
+      "step": 0,
+      "step_name": "Base Order Spine (orders.csv)",
+      "rows_before": 99441,
+      "rows_after": 99441,
+      "unique_orders_before": 99441,
+      "unique_orders_after": 99441,
+      "duplicate_orders": 0,
+      "row_multiplier": 1.0,
+      "status": "PASS"
+    },
+    {
+      "step": 1,
+      "step_name": "Merge 1: LEFT JOIN customers.csv (on customer_id)",
+      "rows_before": 99441,
+      "rows_after": 99441,
+      "unique_orders_before": 99441,
+      "unique_orders_after": 99441,
+      "duplicate_orders": 0,
+      "row_multiplier": 1.0,
+      "status": "PASS"
+    },
+    {
+      "step": 2,
+      "step_name": "Merge 2: LEFT JOIN items_with_seller (aggregated order_items + products + sellers)",
+      "rows_before": 99441,
+      "rows_after": 99441,
+      "unique_orders_before": 99441,
+      "unique_orders_after": 99441,
+      "duplicate_orders": 0,
+      "row_multiplier": 1.0,
+      "status": "PASS"
+    },
+    {
+      "step": 3,
+      "step_name": "Merge 3: LEFT JOIN payments_agg (aggregated order_payments)",
+      "rows_before": 99441,
+      "rows_after": 99441,
+      "unique_orders_before": 99441,
+      "unique_orders_after": 99441,
+      "duplicate_orders": 0,
+      "row_multiplier": 1.0,
+      "status": "PASS"
+    },
+    {
+      "step": 4,
+      "step_name": "Merge 4: LEFT JOIN reviews_agg (deduplicated order_reviews)",
+      "rows_before": 99441,
+      "rows_after": 99441,
+      "unique_orders_before": 99441,
+      "unique_orders_after": 99441,
+      "duplicate_orders": 0,
+      "row_multiplier": 1.0,
+      "status": "PASS"
+    },
+    {
+      "step": 5,
+      "step_name": "Merge 5: LEFT JOIN customer geolocation_agg (on customer_zip_code_prefix)",
+      "rows_before": 99441,
+      "rows_after": 99441,
+      "unique_orders_before": 99441,
+      "unique_orders_after": 99441,
+      "duplicate_orders": 0,
+      "row_multiplier": 1.0,
+      "status": "PASS"
+    },
+    {
+      "step": 6,
+      "step_name": "Merge 6: LEFT JOIN seller geolocation_agg (on seller_zip_code_prefix)",
+      "rows_before": 99441,
+      "rows_after": 99441,
+      "unique_orders_before": 99441,
+      "unique_orders_after": 99441,
+      "duplicate_orders": 0,
+      "row_multiplier": 1.0,
+      "status": "PASS"
+    }
+  ],
+  "reconciliation": {
+    "item_revenue_raw_rs": 13591643.7,
+    "item_revenue_master_rs": 13591643.7,
+    "item_revenue_diff_rs": 0.0,
+    "item_revenue_status": "PASS",
+    "item_freight_raw_rs": 2251909.54,
+    "item_freight_master_rs": 2251909.54,
+    "item_freight_diff_rs": 0.0,
+    "item_freight_status": "PASS",
+    "payment_value_raw_rs": 16008872.12,
+    "payment_value_master_rs": 16008872.12,
+    "payment_value_diff_rs": 0.0,
+    "payment_value_status": "PASS",
+    "reviewed_orders_count": 99441,
+    "total_orders_count": 99441,
+    "review_coverage_pct": 100.0,
+    "review_coverage_status": "PASS"
+  }
+}
