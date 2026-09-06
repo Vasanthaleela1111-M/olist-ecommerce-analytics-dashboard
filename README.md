@@ -158,7 +158,7 @@ Python 3.9+
 Pandas, NumPy, Scikit-Learn
 Modern Web Browser (Chrome, Edge, Firefox, Safari)
 1. Clone the Repository
-git clone https://github.com/DineshPaul-111V/olist-ecommerce-analytics-dashboard.git
+git clone https://github.com/Vasanthaleela1111-M/olist-ecommerce-analytics-dashboard.git
 cd olist-ecommerce-analytics-dashboard
 2. Run the Analytical Pipeline
 Executes data loading, integrity auditing, master order spine construction, and all 11 analytical modules:
@@ -174,4 +174,4 @@ Open your browser and navigate to:
 
 http://localhost:8000/app/index.html
 📜 License & Credits
-This project is licensed under the MIT License. Data provided by Olist via Kaggle's Brazilian E-Commerce Public Dataset. Vasatha leela M
+This project is licensed under the MIT License. Data provided by Olist via Kaggle's Brazilian E-Commerce Public Dataset. Author Dinesh Paul T
