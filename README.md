@@ -126,7 +126,7 @@ olist-ecommerce-analytics-dashboard/
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/DineshPaul-111V/olist-ecommerce-analytics-dashboard.git
+git clone https://github.com/Vasanthaleela1111-M/olist-ecommerce-analytics-dashboard.git
 cd olist-ecommerce-analytics-dashboard
 ```
 
@@ -153,4 +153,4 @@ http://localhost:8000/app/index.html
 
 This project is licensed under the **MIT License**. Data provided by [Olist](https://www.olist.com/) via Kaggle's [Brazilian E-Commerce Public Dataset](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce).
 Author 
-  Dinesh Paul T
+  Vasantha leela M
